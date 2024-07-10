@@ -1,6 +1,6 @@
-#include <stdlib.h>
+#include "ft_malloc.h"
 #include <assert.h>
-void *malloc(size_t size);
+#include <stddef.h>
 
 int main() {
 	void *ptr = malloc(42);

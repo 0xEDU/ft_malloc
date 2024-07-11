@@ -36,7 +36,7 @@ $(PATH_OBJS)%.o: $(PATH_SRCS)%.c
 	@echo "\033[1;92m[SUCCESS] Object" $< "created!\033[0m"
 
 test: all $(TEST_NAME)
-	@valgrind --soname-synonyms=somalloc-lifbt_malloc.so ./$(TEST_NAME)
+	@valgrind --soname-synonyms=somalloc=lifbt_malloc.so ./$(TEST_NAME)
 
 $(TEST_NAME): $(TEST_OBJS)
 	@$(CC) $(FLAGS) $(INCLUDE) -rpath $(RPATH) -L. -lft_malloc -o $(TEST_NAME) $(TEST_OBJS)
@@ -56,5 +56,5 @@ fclean: clean
 	@echo "\033[1;93m[SUCCESS] Library removed!\33[0m"
 
 re: fclean all
-	
+
 .PHONY: all clean fclean re

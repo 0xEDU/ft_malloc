@@ -1,7 +1,11 @@
 ################################################################################
 # Malloc library                                                               #
 ################################################################################
-NAME = libft_malloc.so
+ifeq ($(HOSTTYPE),)
+	HOSTTYPE := $(shell uname -m)_$(shell uname -s)
+endif
+NAME = libft_malloc_${HOSTTYPE}.so
+LINK_NAME = libft_malloc.so
 
 PATH_SRCS = ./src/
 PATH_OBJS = ./obj/
@@ -29,6 +33,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@$(CC) $(FLAGS) -shared -o $(NAME) $(OBJS)
+	@ln -s $(NAME) $(LINK_NAME)
 
 $(PATH_OBJS)%.o: $(PATH_SRCS)%.c
 	@mkdir -p $(PATH_OBJS)
@@ -52,7 +57,7 @@ clean:
 	@echo "\33[1;93m[SUCCESS] Objects removed!\33[0m"
 
 fclean: clean
-	@rm -f $(NAME) $(TEST_NAME)
+	@rm -f $(NAME) $(LINK_NAME) $(TEST_NAME)
 	@echo "\033[1;93m[SUCCESS] Library removed!\33[0m"
 
 re: fclean all

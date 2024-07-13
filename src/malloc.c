@@ -1,13 +1,12 @@
 #include "ft_malloc.h"
 
 void *malloc(size_t size) {
-    (void) size;
-    char *ptr = MMAP(1 * get_page_size());
-    if (ptr == MAP_FAILED) {
-        write(1, "mmap failed\n", 13);
-        return NULL;
+    if (size >= 0 && size <= (size_t)TINY_HEAP_ALLOCATION_SIZE) {
+        
+    } else if (size > (size_t) TINY_HEAP_ALLOCATION_SIZE && size <= (size_t)SMALL_HEAP_ALLOCATION_SIZE) {
+        
+    } else if (size > (size_t) SMALL_HEAP_ALLOCATION_SIZE) {
+        
     }
-    ptr[0] = 'a';
-    write(1, ptr, 1);
 	return NULL;
 }

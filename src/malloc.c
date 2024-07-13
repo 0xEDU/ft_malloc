@@ -1,18 +1,15 @@
 #include "ft_malloc.h"
 #include <stdio.h>
+#include <string.h>
 
 void *malloc(size_t size) {
     (void) size;
     long page_size = sysconf(_SC_PAGESIZE);
-    int fd = -1;
-    if ((fd = open("/dev/zero", O_RDWR, 0) == -1)) {
-        return NULL;
-    }
-    void *ptr = mmap(0, page_size, PROT_READ|PROT_WRITE, MAP_SHARED, fd, 0);
+    char *ptr = mmap(NULL, 1 * page_size, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANON, 0, 0);
     if (ptr == MAP_FAILED) {
-        printf("Map failed");
+        write(1, "mmap failed\n", 13);
         return NULL;
     }
-    printf("%p\n", ptr);
+    ptr[0] = 'a';
 	return NULL;
 }

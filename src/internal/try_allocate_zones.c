@@ -1,15 +1,16 @@
-#include "enums/e_zone.h"
 #include "ft_malloc.h"
 
 void try_allocate_zones(enum e_zone zone) {
-  static t_zone_pointer_pool pointer_pool;
-  (void) pointer_pool;
   switch (zone) {
   case TINY:
-    write(1, "tini", 4);
+    if (global_pointer_pool.tiny_zone_start == NULL) {
+      global_pointer_pool.tiny_zone_start = MMAP(TINY_HEAP_ALLOCATION_SIZE);
+    }
     break;
   case SMALL:
-    write(1, "smol", 4);
+    if (global_pointer_pool.small_zone_start == NULL) {
+      global_pointer_pool.small_zone_start = MMAP(SMALL_HEAP_ALLOCATION_SIZE);
+    }
     break;
   default:
     break;

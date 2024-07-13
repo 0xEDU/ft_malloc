@@ -1,7 +1,7 @@
 #include "enums/e_zone.h"
 #include "ft_malloc.h"
 
-void try_allocate_zones(t_zone_enum zone) {
+void try_allocate_zones(enum e_zone zone) {
   static t_zone_pointer_pool pointer_pool;
   (void) pointer_pool;
   switch (zone) {

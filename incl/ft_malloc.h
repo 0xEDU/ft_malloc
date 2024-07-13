@@ -6,7 +6,7 @@
   mmap(NULL, size, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANON, 0, 0)
 #define TINY_HEAP_ALLOCATION_SIZE (4 * get_page_size())
 #define TINY_BLOCK_SIZE (TINY_HEAP_ALLOCATION_SIZE / 128)
-#define SMALL_HEAP_ALLOCATION_SIZE (16 * get_page_size())
+#define SMALL_HEAP_ALLOCATION_SIZE (100 * get_page_size())
 #define SMALL_BLOCK_SIZE (SMALL_HEAP_ALLOCATION_SIZE / 128)
 
 // System includes
@@ -16,6 +16,9 @@
 #include <unistd.h>
 
 // Custom includes
+# include "libft.h"
+# include "ft_printf.h"
+# include "libput.h"
 #include "enums/e_zone.h"
 #include "types/t_zone_pointer_pool.h"
 

@@ -32,7 +32,7 @@ TEST_OBJS = ${TEST_SRCS:%.c=$(PATH_OBJS)%.o}
 RPATH = $(shell pwd)
 ################################################################################
 
-INCLUDE = -I ./incl/ -I ./incl/enums/ -I ./incl/types
+INCLUDE = -I ./incl/ -I ./incl/enums/ -I ./incl/types -I ./libft/includes
 FLAGS = -Wall -Wextra -Werror -g3
 
 all: $(NAME)

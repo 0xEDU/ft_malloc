@@ -6,6 +6,7 @@ ifeq ($(HOSTTYPE),)
 endif
 NAME = libft_malloc_${HOSTTYPE}.so
 LINK_NAME = libft_malloc.so
+LIBFT = ./libft/libft.a
 
 PATH_SRCS = ./src/
 PATH_INTERNALS = ./src/internal/
@@ -36,10 +37,14 @@ FLAGS = -Wall -Wextra -Werror -g3
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(INTERNALS_OBJS)
-	@$(CC) $(FLAGS) -shared -o $(NAME) $(OBJS) $(INTERNALS_OBJS)
+$(NAME): $(OBJS) $(INTERNALS_OBJS) $(LIBFT)
+	@$(CC) $(FLAGS) -shared -o $(NAME) $(OBJS) $(INTERNALS_OBJS) $(LIBFT)
 	@ln -s $(NAME) $(LINK_NAME)
 
+$(LIBFT):
+	@make --no-print-directory -C libft
+	@echo "\033[1;92m[SUCCESS] LIBFT created!\033[0m"
+		
 $(PATH_OBJS)%.o: $(PATH_SRCS)%.c
 	@mkdir -p $(PATH_OBJS)
 	@$(CC) $(FLAGS) $(INCLUDE) -c $< -fPIC -o $@
@@ -64,10 +69,12 @@ $(PATH_OBJS)%.o: $(PATH_TEST_SRCS)%.c
 
 clean:
 	@rm -rf $(PATH_OBJS)
+	@make --no-print-directory -C libft clean
 	@echo "\33[1;93m[SUCCESS] Objects removed!\33[0m"
 
 fclean: clean
 	@rm -f $(NAME) $(LINK_NAME) $(TEST_NAME)
+	@make --no-print-directory -C libft fclean
 	@echo "\033[1;93m[SUCCESS] Library removed!\33[0m"
 
 re: fclean all

@@ -16,9 +16,9 @@
 #include <unistd.h>
 
 // Custom includes
-# include "libft.h"
-# include "ft_printf.h"
-# include "libput.h"
+# include "../libft/includes/libft.h"
+# include "../libft/includes/ft_printf.h"
+# include "../libft/includes/libput.h"
 #include "enums/e_zone.h"
 #include "types/t_zone_pointer_pool.h"
 

@@ -8,10 +8,14 @@ NAME = libft_malloc_${HOSTTYPE}.so
 LINK_NAME = libft_malloc.so
 
 PATH_SRCS = ./src/
+PATH_INTERNALS = ./src/internal/
 PATH_OBJS = ./obj/
 
 SRCS = malloc.c
 OBJS = ${SRCS:%.c=$(PATH_OBJS)%.o}
+
+INTERNALS_SRCS = get_page_size.c
+INTERNALS_OBJS = ${INTERNALS_SRCS:%.c=$(PATH_OBJS)%.o}
 ################################################################################
 # Malloc tests                                                                 #
 ################################################################################
@@ -31,11 +35,16 @@ FLAGS = -Wall -Wextra -Werror -g3
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	@$(CC) $(FLAGS) -shared -o $(NAME) $(OBJS)
+$(NAME): $(OBJS) $(INTERNALS_OBJS)
+	@$(CC) $(FLAGS) -shared -o $(NAME) $(OBJS) $(INTERNALS_OBJS)
 	@ln -s $(NAME) $(LINK_NAME)
 
 $(PATH_OBJS)%.o: $(PATH_SRCS)%.c
+	@mkdir -p $(PATH_OBJS)
+	@$(CC) $(FLAGS) $(INCLUDE) -c $< -fPIC -o $@
+	@echo "\033[1;92m[SUCCESS] Object" $< "created!\033[0m"
+
+$(PATH_OBJS)%.o: $(PATH_INTERNALS)%.c
 	@mkdir -p $(PATH_OBJS)
 	@$(CC) $(FLAGS) $(INCLUDE) -c $< -fPIC -o $@
 	@echo "\033[1;92m[SUCCESS] Object" $< "created!\033[0m"

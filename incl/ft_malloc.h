@@ -8,8 +8,12 @@
 #include <unistd.h>
 #include <fcntl.h>
 
+// Malloc lib
 void free(void *ptr);
 void *malloc(size_t size);
 void *realloc(void *ptr, size_t size);
+
+// Internals
+long get_page_size();
 
 #endif // !FT_MALLOC_H

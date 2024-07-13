@@ -3,7 +3,7 @@
 #include <stddef.h>
 
 int main() {
-	void *ptr = malloc(42);
-	assert(ptr == NULL);
-	return 0;
+  void *ptr = malloc(42);
+  assert(ptr == NULL);
+  return 0;
 }

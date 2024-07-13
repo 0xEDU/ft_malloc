@@ -14,7 +14,8 @@ PATH_OBJS = ./obj/
 SRCS = malloc.c
 OBJS = ${SRCS:%.c=$(PATH_OBJS)%.o}
 
-INTERNALS_SRCS = get_page_size.c
+INTERNALS_SRCS = 	get_page_size.c \
+									try_allocate_zones.c
 INTERNALS_OBJS = ${INTERNALS_SRCS:%.c=$(PATH_OBJS)%.o}
 ################################################################################
 # Malloc tests                                                                 #
@@ -30,7 +31,7 @@ TEST_OBJS = ${TEST_SRCS:%.c=$(PATH_OBJS)%.o}
 RPATH = $(shell pwd)
 ################################################################################
 
-INCLUDE = -I ./incl/
+INCLUDE = -I ./incl/ -I ./incl/enums/
 FLAGS = -Wall -Wextra -Werror -g3
 
 all: $(NAME)

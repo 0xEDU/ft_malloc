@@ -16,6 +16,10 @@
 #include <sys/mman.h>
 #include <unistd.h>
 
+// Custom includes
+#include "enums/e_zone.h"
+#include "types/t_zone_pointer_pool.h"
+
 // Malloc lib
 void free(void *ptr);
 void *malloc(size_t size);
@@ -23,5 +27,6 @@ void *realloc(void *ptr, size_t size);
 
 // Internals functions
 long get_page_size();
+void try_allocate_zones(t_zone_enum zone);
 
 #endif // !FT_MALLOC_H

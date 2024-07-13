@@ -29,4 +29,6 @@ void *realloc(void *ptr, size_t size);
 long get_page_size();
 void try_allocate_zones(enum e_zone zone);
 
+static t_zone_pointer_pool global_pointer_pool;
+
 #endif // !FT_MALLOC_H

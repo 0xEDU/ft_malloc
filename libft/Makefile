@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: coder <coder@student.42.fr>                +#+  +:+       +#+         #
+#    By: etachott < etachott@student.42sp.org.br    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/27 15:51:38 by coder             #+#    #+#              #
-#    Updated: 2022/11/13 08:08:06 by etachott         ###   ########.fr        #
+#    Updated: 2024/07/24 18:48:03 by etachott         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ PATH_LLSRCS = llsources
 PATH_INCL = includes
 PATH_OBJS = .
 
-CCFLAGS = -Wall -Wextra -Werror
+CCFLAGS = -Wall -Wextra -Werror -fPIC
 
 LIBSRCS = $(addprefix $(PATH_LIBSRCS)/, ft_atoi.c \
 	   ft_bzero.c      \
@@ -85,26 +85,26 @@ LLOBJS = $(LLSRCS:$(PATH_LLSRCS)/%.c=$(PATH_OBJS)/%.o)
 all: $(NAME)
 
 $(NAME): $(LIBOBJS) $(GNLOBJS) $(FT_PRINTFOBJS) $(LLOBJS)
-	ar rcs $(NAME) $(LIBOBJS) $(GNLOBJS) $(FT_PRINTFOBJS)
+	@ar rcs $(NAME) $(LIBOBJS) $(GNLOBJS) $(FT_PRINTFOBJS)
 
 $(LIBOBJS): $(LIBSRCS)
-	$(CC) $(CCFLAGS) -I $(PATH_INCL)/ -c $(LIBSRCS)
+	@$(CC) $(CCFLAGS) -I $(PATH_INCL)/ -c $(LIBSRCS)
 
 $(GNLOBJS): $(GNLSRCS)
-	$(CC) $(CCFLAGS) -D BUFFER_SIZE=1 -I $(PATH_INCL)/ -c $(GNLSRCS)
+	@$(CC) $(CCFLAGS) -D BUFFER_SIZE=1 -I $(PATH_INCL)/ -c $(GNLSRCS)
 
 $(FT_PRINTFOBJS): $(FT_PRINTFSRCS)
-	$(CC) $(CCFLAGS) -I $(PATH_INCL)/ -c $(FT_PRINTFSRCS)
+	@$(CC) $(CCFLAGS) -I $(PATH_INCL)/ -c $(FT_PRINTFSRCS)
 	
 $(LLOBJS): $(LLSRCS)
-	$(CC) $(CCFLAGS) -I $(PATH_INCL)/ -c $(LLSRCS)
+	@$(CC) $(CCFLAGS) -I $(PATH_INCL)/ -c $(LLSRCS)
 
 clean:
-	/bin/rm -f *.o
+	@/bin/rm -f *.o
 
 fclean: clean
-	/bin/rm -f $(NAME)
+	@/bin/rm -f $(NAME)
 
 re: fclean all
 
-.PHONY = all clean fclean re
+.PHONY: all clean fclean re

@@ -29,9 +29,7 @@ void *realloc(void *ptr, size_t size);
 
 // Internals functions
 long get_page_size();
-void try_allocate_zones();
-
-// Global
-static t_zone_pointer_pool global_pointer_pool;
+void *get_block(t_zone_pointer_pool *pointer_pool, enum e_zone zone, int block_number);
+void try_allocate_zones(t_zone_pointer_pool *pointer_pool);
 
 #endif // !FT_MALLOC_H

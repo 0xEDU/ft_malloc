@@ -16,7 +16,8 @@ SRCS = malloc.c
 OBJS = ${SRCS:%.c=$(PATH_OBJS)%.o}
 
 INTERNALS_SRCS = 	get_page_size.c \
-									try_allocate_zones.c
+									try_allocate_zones.c \
+									get_block.c
 INTERNALS_OBJS = ${INTERNALS_SRCS:%.c=$(PATH_OBJS)%.o}
 ################################################################################
 # Malloc tests                                                                 #
@@ -58,8 +59,8 @@ $(PATH_OBJS)%.o: $(PATH_INTERNALS)%.c
 test: all $(TEST_NAME)
 	@valgrind --soname-synonyms=somalloc=lifbt_malloc.so ./$(TEST_NAME)
 
-$(TEST_NAME): $(TEST_OBJS)
-	@$(CC) $(FLAGS) $(INCLUDE) -rpath $(RPATH) -L. -lft_malloc -o $(TEST_NAME) $(TEST_OBJS)
+$(TEST_NAME): $(TEST_OBJS) $(LIBFT)
+	@$(CC) $(FLAGS) $(INCLUDE) -rpath $(RPATH) -L. -lft_malloc -o $(TEST_NAME) $(TEST_OBJS) $(LIBFT)
 	@echo "\033[1;92m[SUCCESS] Object" $< "created!\033[0m"
 
 $(PATH_OBJS)%.o: $(PATH_TEST_SRCS)%.c
